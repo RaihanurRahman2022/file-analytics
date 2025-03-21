@@ -1,4 +1,4 @@
-module github.com/yourusername/file-analytics
+module github.com/RaihanurRahman2022/file-analytics
 
 go 1.21
 
