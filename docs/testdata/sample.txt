@@ -1,0 +1,4 @@
+Hello World
+This is a sample text file
+With multiple lines
+And some words to count 

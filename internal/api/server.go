@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/RaihanurRahman2022/file-analytics/internal/monitor"
 )
 
 // Server represents the HTTP API server
@@ -115,6 +117,64 @@ func (s *Server) handleMetrics(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(metrics)
+}
+
+// Handlers represents the API handlers
+type Handlers struct {
+	metrics *monitor.MetricsCollector
+	mux     *http.ServeMux
+}
+
+// NewHandlers creates new API handlers
+func NewHandlers(metrics *monitor.MetricsCollector) *Handlers {
+	h := &Handlers{
+		metrics: metrics,
+		mux:     http.NewServeMux(),
+	}
+	h.setupRoutes()
+	return h
+}
+
+// Router returns the HTTP router
+func (h *Handlers) Router() http.Handler {
+	return h.mux
+}
+
+// setupRoutes configures API routes
+func (h *Handlers) setupRoutes() {
+	h.mux.HandleFunc("/api/v1/analyze", h.handleAnalyze)
+	h.mux.HandleFunc("/api/v1/hash", h.handleHash)
+	h.mux.HandleFunc("/api/v1/metrics", h.handleMetrics)
+}
+
+// handleAnalyze handles file analysis requests
+func (h *Handlers) handleAnalyze(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+// handleHash handles file hash requests
+func (h *Handlers) handleHash(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+// handleMetrics handles metrics requests
+func (h *Handlers) handleMetrics(w http.ResponseWriter, r *http.Request) {
+	processed, errors, avgDuration := h.metrics.GetMetrics()
+	metrics := map[string]interface{}{
+		"processed": processed,
+		"errors":    errors,
+		"duration":  avgDuration.String(),
+	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(metrics)
 }

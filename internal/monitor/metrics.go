@@ -18,6 +18,11 @@ type MetricsCollector struct {
 	ticker   *time.Ticker
 }
 
+// NewMetrics is an alias for NewMetricsCollector for backward compatibility
+func NewMetrics() *MetricsCollector {
+	return NewMetricsCollector(time.Minute)
+}
+
 // NewMetricsCollector creates a new metrics collector
 // Demonstrates constructor pattern and ticker setup
 func NewMetricsCollector(reportInterval time.Duration) *MetricsCollector {

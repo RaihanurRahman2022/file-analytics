@@ -1,0 +1,11 @@
+{
+  "name": "Test Data",
+  "items": [
+    {"id": 1, "value": "first"},
+    {"id": 2, "value": "second"}
+  ],
+  "metadata": {
+    "created": "2024-03-21",
+    "version": "1.0"
+  }
+} 
