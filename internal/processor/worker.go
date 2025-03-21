@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yourusername/file-analytics/pkg/models"
+	"github.com/RaihanurRahman2022/file-analytics/pkg/models"
 )
 
 // WorkRequest represents a file processing request

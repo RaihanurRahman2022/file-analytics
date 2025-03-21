@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/yourusername/file-analytics/pkg/models"
+	"github.com/RaihanurRahman2022/file-analytics/pkg/models"
 )
 
 // TextProcessor implements the Processor interface for text files
