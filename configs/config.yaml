@@ -1,0 +1,58 @@
+# File Analytics System Configuration
+
+# Processing settings
+processing:
+  # Buffer size for file reading (in bytes)
+  buffer_size: 4096
+  
+  # Maximum number of concurrent processors
+  max_concurrent: 4
+  
+  # File extensions to process
+  extensions:
+    text:
+      - .txt
+      - .log
+      - .md
+    json:
+      - .json
+      - .jsonl
+    csv:
+      - .csv
+      - .tsv
+
+# Output settings
+output:
+  # Output format (text, json, csv)
+  format: text
+  
+  # Output file (leave empty for stdout)
+  file: ""
+  
+  # Include detailed statistics
+  detailed: true
+
+# Logging settings
+logging:
+  # Log level (debug, info, warn, error)
+  level: info
+  
+  # Log file (leave empty for stdout)
+  file: "logs/file-analytics.log"
+  
+  # Include timestamps
+  timestamps: true
+
+# Watch mode settings
+watch:
+  # Directories to watch
+  directories: []
+  
+  # Interval between checks (in seconds)
+  interval: 5
+  
+  # Ignore patterns (glob patterns)
+  ignore:
+    - "*.tmp"
+    - "*.bak"
+    - ".git/" 
